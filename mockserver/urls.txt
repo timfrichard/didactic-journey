@@ -1,0 +1,19 @@
+URLs:
+
+Good example
+https://medium.com/tuimm/api-mocking-with-openapi-d0f7127ce3a7
+
+Everything MockServer
+https://www.mock-server.com/#what-is-mockserver
+
+Local Mock Server Dashboard
+http://localhost:1080/mockserver/dashboard
+
+SwaggerUI
+localhost:8081/purchaseordersystem/swagger-ui/index.html
+
+Tools for everything OpenAPI
+https://openapi.tools/#server
+
+Demos SpringFox provided
+https://github.com/springfox/springfox-demos

@@ -1,0 +1,95 @@
+[
+  {
+    "httpRequest": {
+      "path": "/managePurchaseOrder/1",
+      "method": "GET"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {"department":{"departmentId":3,"name":"Information Technology","floor":3},"description":"This is a description","purchaseOrderId":1,"purchaserName":"Fred Sanford","purchaseOrderLineItems":[{"itemDescription":"Cocoa Puffs","purchaseOrderLineItemId":1,"quantity":2,"total":3.00,"unitPrice":1.50}],"submitDate":"2022-01-20"}
+    }
+  },
+  {
+    "httpRequest": {
+      "path": "/manageDepartment",
+      "method": "GET"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": [{"departmentId":1,"name":"Human Resource","floor":1},{"departmentId":2,"name":"Building Services","floor":2},{"departmentId":3,"name":"Information Technology","floor":3},{"departmentId":4,"name":"Legal","floor":4}]
+    }
+  },
+  {
+    "httpRequest": {
+      "path": "/managePurchaseOrder",
+      "method": "POST",
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {"department": {"departmentId": 3, "name": "Information Technology", "floor": 3 }, "description": "Adding a Purchase Order", "purchaserName": "Richard Pryor", "purchaseOrderLineItems": [ { "itemDescription": "Lays Potato Chips", "quantity": 10, "total": 40.00, "unitPrice": 4.00} ], "submitDate": "2022-01-12"}
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {"department":{"departmentId":3,"name":"Information Technology","floor":3},"description":"Adding a Purchase Order","purchaseOrderId":91,"purchaserName":"Richard Pryor","purchaseOrderLineItems":[{"itemDescription":"Lays Potato Chips","purchaseOrderLineItemId":91,"quantity":10,"total":40.00,"unitPrice":4.00}],"submitDate":"2022-01-12"}
+    }
+  },
+  {
+    "httpRequest": {
+      "path": "/managePurchaseOrder",
+      "method": "POST",
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {"description": "Adding a Purchase Order","purchaserName": "Richard Pryor", "purchaseOrderLineItems": [{"itemDescription": "Lays Potato Chips","quantity": 10,"total": 40.00,"unitPrice": 4.00}],"submitDate": "2022-01-12"}
+    },
+    "httpResponse": {
+      "statusCode": 500,
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {"errors":["Validation failed for argument [0] in public com.richard.tim.purchase.order.system.model.dto.PurchaseOrderDTO com.richard.tim.purchase.order.system.controller.PurchaseOrderController.savePurchaseOrder(com.richard.tim.purchase.order.system.model.dto.PurchaseOrderDTO): [Field error in object 'purchaseOrderDTO' on field 'department': rejected value [null]; codes [NotNull.purchaseOrderDTO.department,NotNull.department,NotNull.com.richard.tim.purchase.order.system.model.dto.DepartmentDTO,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [purchaseOrderDTO.department,department]; arguments []; default message [department]]; default message [Department is required for a purchase order.]] "],"message":"An Error Occurred.","status":"INTERNAL_SERVER_ERROR"}
+    }
+  },
+  {
+    "httpRequest": {
+      "path": "/managePurchaseOrder",
+      "method": "PUT",
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {"department": {"departmentId": 3,"name": "Information Technology","floor": 3},"description": "Changed the description.","purchaseOrderId": 1,"purchaserName": "Fred Sanford","purchaseOrderLineItems": [{"itemDescription": "Cocoa Puffs","purchaseOrderLineItemId": 1,"quantity": 2,"total": 3.00,"unitPrice": 1.50}],"submitDate": "2022-01-14"}
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {"department":{"departmentId":3,"name":"Information Technology","floor":3},"description":"Changed the description.","purchaseOrderId":1,"purchaserName":"Fred Sanford","purchaseOrderLineItems":[{"itemDescription":"Cocoa Puffs","purchaseOrderLineItemId":1,"quantity":2,"total":3.00,"unitPrice":1.50}],"submitDate":"2022-01-14"}
+    }
+  }
+]
