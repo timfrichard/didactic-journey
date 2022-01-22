@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "90160b43-3a10-4131-af97-e9aac0d9e641",
+		"name": "PurchaseOrderSystem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetPurchaseOrder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8081/purchaseordersystem/managePurchaseOrder/1"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllDepartments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8081/purchaseordersystem/manageDepartment"
+			},
+			"response": []
+		},
+		{
+			"name": "PostPurchaseOrder-Save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"department\": {\n        \"departmentId\": 3,\n        \"name\": \"Information Technology\",\n        \"floor\": 3\n    },\n    \"description\": \"Adding a Purchase Order\",\n    \"purchaserName\": \"Richard Pryor\",\n    \"purchaseOrderLineItems\": [\n        {\n            \"itemDescription\": \"Lays Potato Chips\",\n            \"quantity\": 10,\n            \"total\": 40.00,\n            \"unitPrice\": 4.00\n        }\n    ],\n    \"submitDate\": \"2022-01-12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/purchaseordersystem/managePurchaseOrder"
+			},
+			"response": []
+		},
+		{
+			"name": "PutPurchaseOrder-Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"department\": {\n        \"departmentId\": 3,\n        \"name\": \"Information Technology\",\n        \"floor\": 3\n    },\n    \"description\": \"Changed the description.\",\n    \"purchaseOrderId\": 1,\n    \"purchaserName\": \"Fred Sanford\",\n    \"purchaseOrderLineItems\": [\n        {\n            \"itemDescription\": \"Cocoa Puffs\",\n            \"purchaseOrderLineItemId\": 1,\n            \"quantity\": 2,\n            \"total\": 3.00,\n            \"unitPrice\": 1.50\n        }\n    ],\n    \"submitDate\": \"2022-01-14\"\n}"
+				},
+				"url": "http://localhost:8081/purchaseordersystem/managePurchaseOrder"
+			},
+			"response": []
+		},
+		{
+			"name": "PostPurchaseOrder-Save-Error",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Adding a Purchase Order\",\n    \"purchaserName\": \"Richard Pryor\",\n    \"purchaseOrderLineItems\": [\n        {\n            \"itemDescription\": \"Lays Potato Chips\",\n            \"quantity\": 10,\n            \"total\": 40.00,\n            \"unitPrice\": 4.00\n        }\n    ],\n    \"submitDate\": \"2022-01-12\"\n}"
+				},
+				"url": "http://localhost:8081/purchaseordersystem/managePurchaseOrder"
+			},
+			"response": []
+		},
+		{
+			"name": "GetDepartmentById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8081/purchaseordersystem/manageDepartment/1"
+			},
+			"response": []
+		},
+		{
+			"name": "GetDepartmentById-Error",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8081/purchaseordersystem/manageDepartment/100"
+			},
+			"response": []
+		}
+	]
+}
