@@ -1,4 +1,4 @@
-package com.richard.tim.purchase.order.system;
+package com.richard.tim.purchase.order.system.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

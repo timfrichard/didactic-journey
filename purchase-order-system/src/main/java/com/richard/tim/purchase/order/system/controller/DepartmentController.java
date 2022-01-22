@@ -1,7 +1,7 @@
 package com.richard.tim.purchase.order.system.controller;
 
 import com.google.common.collect.Lists;
-import com.richard.tim.purchase.order.system.DepartmentNotFoundException;
+import com.richard.tim.purchase.order.system.exceptions.DepartmentNotFoundException;
 import com.richard.tim.purchase.order.system.model.dto.DepartmentDTO;
 import com.richard.tim.purchase.order.system.model.mapper.DepartmentMapper;
 import com.richard.tim.purchase.order.system.service.DepartmentService;

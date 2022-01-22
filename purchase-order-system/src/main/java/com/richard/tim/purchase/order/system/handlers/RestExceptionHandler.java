@@ -2,7 +2,7 @@ package com.richard.tim.purchase.order.system.handlers;
 
 
 import com.google.common.collect.Lists;
-import com.richard.tim.purchase.order.system.DepartmentNotFoundException;
+import com.richard.tim.purchase.order.system.exceptions.DepartmentNotFoundException;
 import com.richard.tim.purchase.order.system.model.dto.ApiErrorDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
