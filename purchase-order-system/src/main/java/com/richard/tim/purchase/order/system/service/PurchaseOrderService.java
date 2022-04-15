@@ -20,7 +20,7 @@ public class PurchaseOrderService {
     }
 
     public PurchaseOrder findById(final Long purchaseOrderId) {
-        final PurchaseOrder purchaseOrder = purchaseOrderRepository.getById(purchaseOrderId);
+        final PurchaseOrder purchaseOrder = purchaseOrderRepository.getOne(purchaseOrderId);
         return purchaseOrder;
     }
 
