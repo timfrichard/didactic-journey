@@ -156,31 +156,85 @@
                     <append>true</append>
                 </configuration>
                 <executions>
+                    <!-- Before Unit Test Execution Surefire arguments -->
                     <execution>
-                        <id>default-prepare-agent</id>
+                        <id>before-unit-test-execution</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                        <configuration>
+                            <destFile>${project.build.directory}/jacoco-output/jacoco-unit-tests.exec</destFile>
+                            <propertyName>surefire.jacoco.args</propertyName>
+                        </configuration>
                     </execution>
+                    <!-- After Unit Test Execution -->
                     <execution>
-                        <id>default-prepare-agent-integration</id>
-                        <goals>
-                            <goal>prepare-agent-integration</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>default-report</id>
-                        <phase>prepare-package</phase>
+                        <id>after-unit-test-execution</id>
+                        <phase>test</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <dataFile>${project.build.directory}/jacoco-output/jacoco-unit-tests.exec</dataFile>
+                            <outputDirectory>${project.reporting.outputDirectory}/jacoco-unit-test-coverage-report</outputDirectory>
+                        </configuration>
                     </execution>
+                    <!-- Before Integration Test Execution with Failsafe arguments -->
                     <execution>
-                        <id>default-report-integration</id>
-                        <phase>prepare-package</phase>
+                        <id>before-integration-test-execution</id>
+                        <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>report-integration</goal>
+                            <goal>prepare-agent</goal>
                         </goals>
+                        <configuration>
+                            <destFile>${project.build.directory}/jacoco-output/jacoco-integration-tests.exec</destFile>
+                            <propertyName>failsafe.jacoco.args</propertyName>
+                        </configuration>
+                    </execution>
+                    <!-- After Integration Test which will build the data and report-->
+                    <execution>
+                        <id>after-integration-test-execution</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${project.build.directory}/jacoco-output/jacoco-integration-tests.exec</dataFile>
+                            <outputDirectory>${project.reporting.outputDirectory}/jacoco-integration-test-coverage-report</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <!-- Merging Unit and Integration data together -->
+                    <!-- This execution should be next to last -->
+                    <execution>
+                        <id>merge-unit-and-integration</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>merge</goal>
+                        </goals>
+                        <configuration>
+                            <fileSets>
+                                <fileSet>
+                                    <directory>${project.build.directory}/jacoco-output/</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </fileSet>
+                            </fileSets>
+                            <destFile>${project.build.directory}/jacoco-output/merged.exec</destFile>
+                        </configuration>
+                    </execution>
+                    <!-- Merging as one report the merged data from unit and integration tests -->
+                    <!-- The order of this execution is critical and it should be last -->
+                    <execution>
+                        <id>create-merged-report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${project.build.directory}/jacoco-output/merged.exec</dataFile>
+                            <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -190,16 +244,14 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven.failsafe.plugin.ver}</version>
                 <configuration>
+                    <!-- This argument line item is set in the Jacoco "before-integration-test-execution" as a propertyName-->
+                    <argLine>${failsafe.jacoco.args}</argLine>
                     <classesDirectory>${project.build.outputDirectory}</classesDirectory>
                     <useSystemClassLoader>false</useSystemClassLoader>
                     <forkCount>2.5C</forkCount>
                     <reuseForks>true</reuseForks>
                     <parallel>classesAndMethods</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
-<!--                    <argLine>-Xmx1024m</argLine>-->
-<!--                    <argLine>-->
-<!--                        @{argLine} &#45;&#45;illegal-access=permit-->
-<!--                    </argLine>-->
                 </configuration>
                 <executions>
                     <execution>
@@ -215,13 +267,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.ver}</version>
                 <configuration>
-                    <useSystemClassLoader>false</useSystemClassLoader>
-                    <forkCount>2</forkCount>
-                    <reuseForks>true</reuseForks>
-                    <argLine>-Xmx1024m</argLine>
-                    <argLine>
-                        @{argLine} --illegal-access=permit
-                    </argLine>
+                    <!-- This argument line item is set in the Jacoco "before-unit-test-execution" as a propertyName-->
+                    <argLine>${surefire.jacoco.args}</argLine>
                 </configuration>
             </plugin>
         </plugins>
