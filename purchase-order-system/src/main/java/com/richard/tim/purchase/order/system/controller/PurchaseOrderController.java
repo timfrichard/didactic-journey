@@ -1,5 +1,6 @@
 package com.richard.tim.purchase.order.system.controller;
 
+import com.google.common.collect.Lists;
 import com.richard.tim.purchase.order.system.model.dto.PurchaseOrderDTO;
 import com.richard.tim.purchase.order.system.model.entities.PurchaseOrder;
 import com.richard.tim.purchase.order.system.model.mapper.PurchaseOrderMapper;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -45,6 +47,32 @@ public class PurchaseOrderController {
 
         return PurchaseOrderMapper.MAPPER.purchaseOrderToDto(
                 purchaseOrderService.save(purchaseOrder));
+    }
+
+    @PostMapping("/saveAll")
+    public List<PurchaseOrderDTO> savePurchaseOrders(@Valid @RequestBody final List<PurchaseOrderDTO> purchaseOrderDTOS) {
+
+        List<PurchaseOrderDTO> returnDTOs = Lists.newArrayList();
+        List<PurchaseOrder> purchaseOrders = Lists.newArrayList();
+        purchaseOrderDTOS.forEach(purchaseOrderDTO -> purchaseOrders.add(buildPurchaseOrder(purchaseOrderDTO)));
+
+        purchaseOrderService.saveAll(purchaseOrders).forEach(purchaseOrder ->
+                returnDTOs.add(PurchaseOrderMapper.MAPPER.purchaseOrderToDto(purchaseOrder)));
+
+        return returnDTOs;
+    }
+
+    @PostMapping("/saveAllWithFlush")
+    public List<PurchaseOrderDTO> savePurchaseOrdersWithFlush(@Valid @RequestBody final List<PurchaseOrderDTO> purchaseOrderDTOS) {
+
+        List<PurchaseOrderDTO> returnDTOs = Lists.newArrayList();
+        List<PurchaseOrder> purchaseOrders = Lists.newArrayList();
+        purchaseOrderDTOS.forEach(purchaseOrderDTO -> purchaseOrders.add(buildPurchaseOrder(purchaseOrderDTO)));
+
+        purchaseOrderService.saveAllWithFlush(purchaseOrders).forEach(purchaseOrder ->
+                returnDTOs.add(PurchaseOrderMapper.MAPPER.purchaseOrderToDto(purchaseOrder)));
+
+        return returnDTOs;
     }
 
     @PutMapping()

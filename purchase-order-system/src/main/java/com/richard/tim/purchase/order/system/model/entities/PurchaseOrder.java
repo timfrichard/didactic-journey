@@ -29,6 +29,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "PURCHASE_ORDER")
+@ToString
 public class PurchaseOrder {
 
     @ManyToOne(optional = false)
@@ -40,8 +41,8 @@ public class PurchaseOrder {
 
     @Column(name = "PURCHASE_ORDER_ID", unique = true, nullable = false)
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchase_order_sequence_gen")
-    @SequenceGenerator(allocationSize = 10, name = "purchase_order_sequence_gen", sequenceName = "PURCHASE_ORDER_ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "purchase_order_sequence_gen")
+    @SequenceGenerator(name = "purchase_order_sequence_gen", sequenceName = "PURCHASE_ORDER_ID_SEQ", schema = "PURCHASE_ORDER_SYSTEM_SCHEMA", allocationSize = 1)
     private Long purchaseOrderId;
 
     @ToString.Exclude

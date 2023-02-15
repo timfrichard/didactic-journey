@@ -36,7 +36,7 @@ public class PurchaseOrderLineItem {
     @Column(name = "PO_LINE_ITEM_ID", unique = true, nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "po_line_item_sequence_gen")
-    @SequenceGenerator(allocationSize = 10, name = "po_line_item_sequence_gen", sequenceName = "PO_LINE_ITEM_ID_SEQ")
+    @SequenceGenerator(name = "po_line_item_sequence_gen", sequenceName = "PO_LINE_ITEM_ID_SEQ", schema = "PURCHASE_ORDER_SYSTEM_SCHEMA", allocationSize = 1)
     private Long purchaseOrderLineItemId;
 
     @Column(name = "QUANTITY")

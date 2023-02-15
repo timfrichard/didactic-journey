@@ -37,7 +37,14 @@ spring:
     open-in-view: true
     properties:
       hibernate:
+        batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
+        jdbc:
+          batch_size: 5
         default_schema: PURCHASE_ORDER_SYSTEM_SCHEMA
+        show_sql: true
+    show-sql: true
   main:
     allow-bean-definition-overriding: true
   # The following property used to fix Swagger Issues with Spring Boot 2.6

@@ -11,6 +11,9 @@
     <!-- Setting the logging level to WARN for code in net.javabeat.service -->
     <logger name="org.springframework" level="INFO"/>
     <logger name="com.richard.tim" level="DEBUG"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.engine.transaction" level="DEBUG"/>
+    <logger name="org.hibernate.event.internal" level="DEBUG"/>
 
     <!-- Setting the root level of logging to INFO -->
     <root level="INFO">
