@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class PurchaseOrderService {
 
-    @Value("${spring.jpa.properties.jdbc.batch_size:10}")
+    @Value("${spring.jpa.properties.hibernate.jdbc.batch_size:10}")
     private Integer batchSize;
 
     @PersistenceContext
@@ -55,19 +55,29 @@ public class PurchaseOrderService {
     @Transactional
     public List<PurchaseOrder> saveAllWithFlush(final List<PurchaseOrder> purchaseOrders) {
 
-        AtomicInteger i = new AtomicInteger();
+        AtomicInteger atomicInteger = new AtomicInteger();
         List<PurchaseOrder> returnPurchaseOrders = Lists.newArrayList();
         purchaseOrders.forEach(purchaseOrder -> {
-            if (i.get() > 0 && i.get() % batchSize == 0) {
-                log.info("FLUSHING");
-                entityManager.flush();
-                entityManager.clear();
+            try {
+                saveAndFlush(atomicInteger);
+                log.info("Before saving purchase order {}", purchaseOrder.getPurchaserName());
+                returnPurchaseOrders.add(purchaseOrderRepository.save(purchaseOrder));
+                log.info("Done saving purchase order id: {}", purchaseOrder.getPurchaseOrderId());
+
+            } catch (Exception e) {
+                log.error("Exception happened from saving purchase order.", e);
+            } finally {
+                atomicInteger.getAndIncrement();
             }
-            log.info("Before saving purchase order {}", purchaseOrder.getPurchaserName());
-            returnPurchaseOrders.add(purchaseOrderRepository.save(purchaseOrder));
-            log.info("Done saving purchase order id: {}", purchaseOrder.getPurchaseOrderId());
-            i.getAndIncrement();
         });
         return returnPurchaseOrders;
+    }
+
+    private void saveAndFlush(final AtomicInteger i) {
+        if (i.get() > 0 && i.get() % batchSize == 0) {
+            log.info("FLUSHING");
+            entityManager.flush();
+            entityManager.clear();
+        }
     }
 }
