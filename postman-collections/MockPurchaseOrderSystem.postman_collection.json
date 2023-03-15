@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "68c95a64-1756-4d0e-b024-3ccbd1709b44",
+		"_postman_id": "d6f03855-e86a-482d-9d73-abb23a9ce29c",
 		"name": "MockPurchaseOrderSystem",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -36,7 +36,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"department\": {\n        \"departmentId\": 3,\n        \"name\": \"Information Technology\",\n        \"floor\": 3\n    },\n    \"description\": \"Adding a Purchase Order\",\n    \"purchaserName\": \"Richard Pryor\",\n    \"purchaseOrderLineItems\": [\n        {\n            \"itemDescription\": \"Lays Potato Chips\",\n            \"quantity\": 10,\n            \"total\": 40.00,\n            \"unitPrice\": 4.00\n        }\n    ],\n    \"submitDate\": \"2022-01-12\"\n}",
+					"raw": "{\n    \"department\": {\n        \"departmentId\": 3,\n        \"name\": \"Information Technology\",\n        \"floor\": 3\n    },\n    \"description\": \"Adding a Purchase Order\",\n    \"purchaserName\": \"Richard Pryor\",\n    \"purchaseOrderLineItems\": [\n        {\n            \"itemDescription\": \"Lays Potato Chips\",\n            \"quantity\": 10,\n            \"total\": 40.00,\n            \"unitPrice\": 4.00\n        },\n        {\n            \"itemDescription\": \"Chips Ahoy Cookies\",\n            \"quantity\": 1,\n            \"total\": 4.00,\n            \"unitPrice\": 4.00\n        }\n    ],\n    \"submitDate\": \"2022-01-12\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -89,7 +89,13 @@
 			"name": "GetDepartmentById",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
 				"url": "http://localhost:1080/manageDepartment/1"
 			},
 			"response": []

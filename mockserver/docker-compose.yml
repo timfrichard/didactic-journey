@@ -11,5 +11,5 @@ services:
       MOCKSERVER_INITIALIZATION_JSON_PATH: /config/initializer.json
     volumes:
       - .:/config:ro
-    networks: 
+    networks:
       - default
