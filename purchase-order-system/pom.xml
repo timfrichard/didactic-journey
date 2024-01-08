@@ -5,22 +5,26 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.2.RELEASE</version>
+        <version>2.7.18</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.richard.tim</groupId>
     <artifactId>purchase-order-system</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>purchase-order-system</name>
     <description>Demo Project for a Purchase Order System</description>
 
     <properties>
+        <com.google.guava.ver>32.0.0-android</com.google.guava.ver>
+        <com.h2database.ver>2.2.220</com.h2database.ver>
+        <datasource.proxy.ver>1.10</datasource.proxy.ver>
         <jacoco.version>0.8.6</jacoco.version>
         <java.version>1.8</java.version>
         <maven.compiler.plugin.ver>3.8.1</maven.compiler.plugin.ver>
         <maven.surefire.plugin.ver>2.22.2</maven.surefire.plugin.ver>
         <maven.failsafe.plugin.ver>2.22.2</maven.failsafe.plugin.ver>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <spring.doc.api.ver>1.7.0</spring.doc.api.ver>
     </properties>
 
     <dependencies>
@@ -63,6 +67,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+            <version>${com.h2database.ver}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -78,17 +83,17 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.4</version>
+            <version>${spring.doc.api.ver}</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>31.0.1-jre</version>
+            <version>${com.google.guava.ver}</version>
         </dependency>
         <dependency>
             <groupId>net.ttddyy</groupId>
             <artifactId>datasource-proxy</artifactId>
-            <version>1.8.1</version>
+            <version>${datasource.proxy.ver}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -98,7 +103,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.23.4</version>
+            <version>5.8.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
