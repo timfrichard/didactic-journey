@@ -2,8 +2,7 @@ package com.richard.tim.purchase.order.system.controller;
 
 import com.richard.tim.purchase.order.system.AbstractPurchaseOrderSystemIT;
 import com.richard.tim.purchase.order.system.model.dto.DepartmentDTO;
-import com.richard.tim.purchase.order.system.model.entities.Department;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
@@ -13,9 +12,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Objects;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DepartmentControllerIT extends AbstractPurchaseOrderSystemIT {
 
@@ -33,7 +33,7 @@ public class DepartmentControllerIT extends AbstractPurchaseOrderSystemIT {
                 });
 
         assertNotNull(response);
-        assertTrue(response.getBody().size() > 0);
+        assertFalse(Objects.requireNonNull(response.getBody()).isEmpty());
 
     }
 
